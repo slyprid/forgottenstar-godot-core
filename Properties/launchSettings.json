@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Forgotten Star Core": {
+      "commandName": "Project"
+    },
+    "Godot": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Godot\\ver_4\\godot_4_2_2_rc2\\Godot_v4.2.2-rc2_mono_win64.exe",
+      "commandLineArgs": "D:\\Godot\\ver_4\\godot_4_2_2_rc2\\Godot_v4.2.2-rc2_mono_win64.exe",
+      "workingDirectory": "."
+    }
+  }
+}
