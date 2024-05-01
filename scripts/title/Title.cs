@@ -18,7 +18,10 @@ public partial class Title : Control
 
     public void OnSettingsButtonUp()
     {
+        var scene = ResourceLoader.Load<PackedScene>(Registry.Scenes.OptionsScreen);
+        var settings_menu = scene.Instantiate();
 
+        GetTree().Root.AddChild(settings_menu);
     }
 
     public void OnQuitButtonUp()
