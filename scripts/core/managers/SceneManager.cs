@@ -152,6 +152,17 @@ public partial class SceneManager
 
     #endregion
 
+    #region Special Scene Events
+
+    public void OpenOptionsScreen()
+    {
+        var scene = ResourceLoader.Load<PackedScene>(Registry.Scenes.OptionsScreen);
+        var optionsScreen = scene.Instantiate();
+
+        GetTree().Root.AddChild(optionsScreen);
+    }
+
+    #endregion
 
     #region Events
 

@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp4475x7x3mwn"]
+[gd_scene load_steps=6 format=3 uid="uid://dp4475x7x3mwn"]
 
 [ext_resource type="Script" path="res://scripts/title/Options.cs" id="1_exin8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26m1t"]
-bg_color = Color(0, 0, 0, 0.396078)
+bg_color = Color(0, 0, 0, 0.752941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glord"]
+bg_color = Color(0.309804, 0.309804, 0.309804, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+corner_radius_top_left = 16
+corner_radius_top_right = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3swf"]
 bg_color = Color(0.309804, 0.309804, 0.309804, 1)
@@ -11,18 +19,25 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+expand_margin_top = 8.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_viskt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exv4n"]
+bg_color = Color(0.309804, 0.309804, 0.309804, 1)
+border_width_left = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_top = 4.0
 
 [node name="Options" type="CanvasLayer"]
 process_mode = 2
 script = ExtResource("1_exin8")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="BackgroundOverlay" type="Panel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,128 +45,211 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26m1t")
 
-[node name="BackgroundPanel" type="Panel" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BackgroundOverlay"]
+custom_minimum_size = Vector2(640, 480)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -240.0
-offset_right = 320.0
-offset_bottom = 240.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HeaderPanel" type="Panel" parent="BackgroundOverlay/VBoxContainer"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_glord")
+
+[node name="Heading" type="Label" parent="BackgroundOverlay/VBoxContainer/HeaderPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -22.5
+offset_right = 61.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Options"
+horizontal_alignment = 1
+
+[node name="BackgroundPanel" type="Panel" parent="BackgroundOverlay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_a3swf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/BackgroundPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/BackgroundPanel/MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Heading" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer"]
+[node name="Gameplay" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "Options"
-horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Gameplay"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="GridContainer" type="GridContainer" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Gameplay/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="MusicVolumeLabel" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Music Volume"
-
-[node name="MusicVolumeSlider" type="HSlider" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SFXVolumeLabel" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "SFX Volume"
-
-[node name="SFXVolumeSlider" type="HSlider" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="ResolutionLabel" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Resolution
-"
-
-[node name="ResolutionCombo" type="OptionButton" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="LanguageLabel" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="LanguageLabel" type="Label" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Gameplay/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Language
 "
 
-[node name="LanguageCombo" type="OptionButton" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="LanguageCombo" type="OptionButton" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Gameplay/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="LanguageLabel2" type="Label" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="Audio" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="GridContainer" type="GridContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2/GridContainer"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "Full Screen
-"
+text = "Music Volume"
 
-[node name="FullScreenCheckBox" type="CheckButton" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="MusicVolumeSlider" type="HSlider" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+value = 1.0
 
-[node name="Panel" type="Panel" parent="Panel/BackgroundPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 24)
+[node name="SFXVolumeLabel" type="Label" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_viskt")
+theme_override_font_sizes/font_size = 22
+text = "SFX Volume"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/BackgroundPanel/MarginContainer"]
+[node name="SFXVolumeSlider" type="HSlider" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+value = 1.0
 
-[node name="CancelButton" type="Button" parent="Panel/BackgroundPanel/MarginContainer/HBoxContainer"]
+[node name="Graphics" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="GridContainer" type="GridContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="WindowModeLabel" type="Label" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Window Mode
+"
+
+[node name="WindowModeCombo" type="OptionButton" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResolutionLabel" type="Label" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Resolution
+"
+
+[node name="ResolutionCombo" type="OptionButton" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MonitorLabel" type="Label" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Monitor
+"
+
+[node name="MonitorCombo" type="OptionButton" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonPanel" type="Panel" parent="BackgroundOverlay/VBoxContainer"]
+custom_minimum_size = Vector2(296, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_exv4n")
+
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/ButtonPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.0
+offset_bottom = 47.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="CancelButton" type="Button" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -159,10 +257,20 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 22
 text = "Cancel"
 
-[node name="SaveButton" type="Button" parent="Panel/BackgroundPanel/MarginContainer/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 22
 text = "Save"
+
+[connection signal="item_selected" from="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Gameplay/MarginContainer/GridContainer/LanguageCombo" to="." method="OnLanguageValueChanged"]
+[connection signal="value_changed" from="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2/GridContainer/MusicVolumeSlider" to="." method="OnMusicSliderValueChanged"]
+[connection signal="value_changed" from="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Audio/MarginContainer2/GridContainer/SFXVolumeSlider" to="." method="OnSFXSliderValueChanged"]
+[connection signal="item_selected" from="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer/WindowModeCombo" to="." method="OnWindowModeSelectionChanged"]
+[connection signal="item_selected" from="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer/ResolutionCombo" to="." method="OnWindowResolutionValueChanged"]
+[connection signal="item_selected" from="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/TabContainer/Graphics/MarginContainer2/GridContainer/MonitorCombo" to="." method="OnMonitorSelectionChanged"]
+[connection signal="pressed" from="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer/CancelButton" to="." method="OnCancelButtonPressed"]
+[connection signal="pressed" from="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]

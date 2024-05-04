@@ -18,7 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://scripts/core/Globals.cs"
-SceneManager="*res://scripts/core/scenes/SceneManager.cs"
+SceneManager="*res://scripts/core/managers/SceneManager.cs"
+AudioManager="*res://scripts/core/managers/AudioManager.cs"
+DisplayManager="*res://scripts/core/managers/DisplayManager.cs"
+LanguageManager="*res://scripts/core/managers/LanguageManager.cs"
+FileManager="*res://scripts/core/managers/FileManager.cs"
 
 [display]
 
