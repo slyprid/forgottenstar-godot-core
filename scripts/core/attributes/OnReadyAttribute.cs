@@ -1,8 +1,8 @@
+// ReSharper disable CheckNamespace
 using System;
-using Godot;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public partial class OnReadyAttribute 
+public class OnReadyAttribute 
     : Attribute
 {
     public string Name { get; set; }

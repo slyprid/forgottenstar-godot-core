@@ -1,0 +1,139 @@
+[gd_scene load_steps=5 format=3 uid="uid://didqj058xw1iy"]
+
+[ext_resource type="Script" path="res://scripts/core/controls/MessageBox.cs" id="1_70t1p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ov73"]
+bg_color = Color(0, 0, 0, 0.752941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfrkk"]
+bg_color = Color(0.309804, 0.309804, 0.309804, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+expand_margin_top = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mf6ay"]
+bg_color = Color(0.309804, 0.309804, 0.309804, 1)
+border_width_left = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_top = 9.0
+
+[node name="MessageBox" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_70t1p")
+
+[node name="BackgroundOverlay" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ov73")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackgroundOverlay"]
+custom_minimum_size = Vector2(512, 240)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundPanel" type="Panel" parent="BackgroundOverlay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_vfrkk")
+
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="MessageText" type="RichTextLabel" parent="BackgroundOverlay/VBoxContainer/BackgroundPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+
+[node name="ButtonPanel" type="Panel" parent="BackgroundOverlay/VBoxContainer"]
+custom_minimum_size = Vector2(296, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mf6ay")
+
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundOverlay/VBoxContainer/ButtonPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="NoButton" type="Button" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "No"
+
+[node name="CancelButton" type="Button" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "Cancel"
+
+[node name="OkButton" type="Button" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "OK"
+
+[node name="YesButton" type="Button" parent="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "Yes"
+
+[connection signal="pressed" from="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer/NoButton" to="." method="OnNoButtonPressed"]
+[connection signal="pressed" from="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer/CancelButton" to="." method="OnCancelButtonPressed"]
+[connection signal="pressed" from="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer/OkButton" to="." method="OnOkButtonPressed"]
+[connection signal="pressed" from="BackgroundOverlay/VBoxContainer/ButtonPanel/MarginContainer/HBoxContainer/YesButton" to="." method="OnYesButtonPressed"]

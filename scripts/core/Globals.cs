@@ -8,6 +8,8 @@ public partial class Globals : Node
 
     public static Globals Instance => Core.GetSingleton<Globals>();
 
+    public static Node Root => Instance.GetTree().Root;
+
     #region Fields
 
     private GameSettingsResource _gameSettings;

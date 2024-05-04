@@ -23,7 +23,10 @@ public partial class Title : Control
 
     public void OnQuitButtonUp()
     {
-        Globals.Instance.Quit();
+        //Globals.Instance.Quit();
+        MessageBox.Show("[center]Are you sure you want to quit?[/center]")
+            .HasNoButton()
+            .HasYesButton(Globals.Instance.Quit);
     }
 
     #endregion
