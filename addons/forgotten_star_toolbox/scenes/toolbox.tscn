@@ -1,0 +1,144 @@
+[gd_scene load_steps=2 format=3 uid="uid://crf6dfj6u8u4d"]
+
+[ext_resource type="Script" path="res://addons/forgotten_star_toolbox/scripts/Toolbox.cs" id="1_cldjj"]
+
+[node name="Toolbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cldjj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Registry" type="Panel" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Registry"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="AudioSection" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/AudioSection"]
+layout_mode = 2
+text = "Audio"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/AudioSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "SFX Asset Path:                               "
+
+[node name="SFXAssetPathText" type="LineEdit" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "res://assets/sfx/"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Music Asset Path:                           "
+
+[node name="MusicAssetPathText" type="LineEdit" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "res://assets/music/"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Registry Script Path:                      "
+
+[node name="RegistryScriptPathText" type="LineEdit" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "res://scripts/core/registry/"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Registry Script Filename:             "
+
+[node name="RegistryScriptFilenameText" type="LineEdit" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "AudioRegistry.cs"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GenerateButton" type="Button" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Generate"
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="AudioRegistryProgress" type="ProgressBar" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+
+[node name="AudioRegistryOutput" type="LineEdit" parent="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/TabContainer/Registry/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4/GenerateButton" to="." method="OnGenerateAudioRegistryFilePressed"]

@@ -1,0 +1,17 @@
+using Godot;
+
+public partial class Registry
+{
+    public static class Audio
+    {
+        public static class SoundEffects
+        {
+            public static string Back001 = "res://assets/sfx/back_001.ogg";
+        }
+
+        public static class Music
+        {
+
+        }
+    }
+}

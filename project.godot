@@ -33,10 +33,15 @@ window/size/viewport_height=720
 
 project/assembly_name="Forgotten Star Core"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/forgotten_star_toolbox/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
 "res://assets/": "red",
+"res://assets/gfx/": "purple",
 "res://data/": "orange",
 "res://scenes/": "yellow",
 "res://scripts/": "green"
