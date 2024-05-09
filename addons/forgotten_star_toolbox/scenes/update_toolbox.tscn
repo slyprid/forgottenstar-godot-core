@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://casvjp502cjv8"]
+
+[ext_resource type="Script" path="res://addons/forgotten_star_toolbox/scripts/UpdateToolbox.cs" id="1_w5s70"]
+[ext_resource type="Texture2D" uid="uid://b61unx57ywk3a" path="res://addons/forgotten_star_toolbox/assets/Logo.png" id="2_vdfhf"]
+
+[node name="UpdateToolbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w5s70")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_vdfhf")
+stretch_mode = 4
+
+[node name="VersionAvailableLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "v1.2.3 is available for download."
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DownloadButton" type="Button" parent="VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Download update"
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="NotesButton" type="LinkButton" parent="VBoxContainer/CenterContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Read release notes"
