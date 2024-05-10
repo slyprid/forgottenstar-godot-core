@@ -12,8 +12,8 @@ public partial class UpdateToolbox : Control
     [OnReady("%VersionAvailableLabel")] public Label VersionAvailableLabel { get; set; }
     [OnReady("%HTTPRequest")] public HttpRequest HttpRequest { get; set; }
     [OnReady("%DownloadButton")] public Button DownloadButton { get; set; }
-
-    public UpdateToolbox()
+    
+    public override void _Ready()
     {
         this.SetOnReadyProperties();
     }

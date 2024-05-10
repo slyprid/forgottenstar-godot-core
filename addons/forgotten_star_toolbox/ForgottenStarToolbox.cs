@@ -13,6 +13,7 @@ public partial class ForgottenStarToolbox : EditorPlugin
     {
         _toolboxScene = ResourceLoader.Load<PackedScene>("res://addons/forgotten_star_toolbox/scenes/toolbox.tscn");
         _toolbox = _toolboxScene.Instantiate<Control>();
+        (_toolbox as Toolbox).EditorPlugin = this;
         AddControlToBottomPanel(_toolbox, "Toolbox");
     }
 
@@ -20,6 +21,14 @@ public partial class ForgottenStarToolbox : EditorPlugin
     {
         RemoveControlFromBottomPanel(_toolbox);
         _toolbox?.Free();
+    }
+
+    public string GetVersion()
+    {
+        var config = new ConfigFile();
+        var script = (Script)this.GetScript();
+        config.Load($"{script.ResourcePath.GetBaseDir()}/plugin.cfg");
+        return config.GetValue("plugin", "version").ToString();
     }
 }
 #endif

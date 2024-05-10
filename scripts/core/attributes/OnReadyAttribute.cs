@@ -7,6 +7,7 @@ public class OnReadyAttribute
 {
     public string Name { get; set; }
 
+
     public OnReadyAttribute(string nodeName)
     {
         Name = nodeName;

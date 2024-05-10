@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Forgotten Star Core"
-run/main_scene="res://scenes/title/title.tscn"
+run/main_scene="res://addons/forgotten_star_toolbox/scenes/toolbox.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

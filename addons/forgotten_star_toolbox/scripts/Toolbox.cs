@@ -19,11 +19,25 @@ public partial class Toolbox : Control
     [OnReady("%AudioRegistryProgress")] public ProgressBar AudioRegistryProgress { get; set; }
     [OnReady("%AudioRegistryOutput")] public LineEdit AudioRegistryOutput { get; set; }
 
+    [OnReady("%CurrentVersionLabel")] public RichTextLabel CurrentVersionLabel { get; set; }
+    [OnReady("%AvailableVersionLabel")] public RichTextLabel AvailableVersionLabel { get; set; }
+    [OnReady("%UpdateButton")] public UpdateButton UpdateButton { get; set; }
+    [OnReady("%UpdateVersionProgress")] public ProgressBar UpdateVersionProgress { get; set; }
+    
+    #endregion
+
+    #region Properties
+
+    public ForgottenStarToolbox EditorPlugin { get; set; }
+
     #endregion
 
     public override void _Ready()
     {
         this.SetOnReadyProperties();
+
+        UpdateButton.EditorPlugin = EditorPlugin;
+        CurrentVersionLabel.Text = $"v {EditorPlugin.GetVersion()}";
     }
 
     #region Signals / Events
@@ -141,6 +155,12 @@ public partial class Toolbox : Control
 
         AudioRegistryOutput.Text = "Complete!";
     }
+
+    #endregion
+
+    #region Update Methods / Functions
+
+
 
     #endregion
 }
