@@ -37,7 +37,8 @@ public partial class Toolbox : Control
         this.SetOnReadyProperties();
 
         UpdateButton.EditorPlugin = EditorPlugin;
-        CurrentVersionLabel.Text = $"v {EditorPlugin.GetVersion()}";
+        UpdateButton.AvailableVersionLabel = AvailableVersionLabel;
+        CurrentVersionLabel.Text = $"{EditorPlugin.GetVersion()}";
     }
 
     #region Signals / Events

@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
 using Godot;
+using Godot.Collections;
 
 [Tool]
-public partial class UpdateButton : Control
+public partial class UpdateButton : Button
 {
     private string _url = "https://api.github.com/repos/slyprid/forgottenstar-godot-core/releases";
 
@@ -19,6 +23,7 @@ public partial class UpdateButton : Control
     #region Properties
 
     public ForgottenStarToolbox EditorPlugin { get; set; }
+    public RichTextLabel AvailableVersionLabel { get; set; }
 
     #endregion
 
@@ -43,9 +48,53 @@ public partial class UpdateButton : Control
         if (result != (long)HttpRequest.Result.Success) return;
 
         var currentVersion = EditorPlugin.GetVersion();
-        GD.Print(currentVersion);
+
+        var response = Json.ParseString(body.GetStringFromUtf8());
+        if (response.GetType() != typeof(Variant)) return;
+        
+        var versions = new List<string>();
+        foreach (var data in response.AsGodotArray())
+        {
+            var release = Json.ParseString(data.ToString()).AsGodotDictionary();
+            versions.Add(release["tag_name"].ToString());
+        }
+
+        var versionNumbers = new List<int>();
+        foreach (var version in versions)
+        {
+            versionNumbers.Add(VersionToNumber(version));
+        }
+
+        if (versions.Count() > 0)
+        {
+            var latestVersion = versions[versionNumbers.MaxIndex()];
+            var latestVersionNumber = versionNumbers.Max();
+            var currentVersionNumber = VersionToNumber(currentVersion);
+            AvailableVersionLabel.Text = latestVersion;
+
+            if (latestVersionNumber > currentVersionNumber)
+            {
+                Text = $"Update Available [{latestVersion}]";
+                AddThemeColorOverride("font_color", Colors.Red);
+            }
+            else
+            {
+                Text = $"Update to Date [{latestVersion}]";
+                AddThemeColorOverride("font_color", Colors.Green);
+            }
+        }
     }
 
     #endregion
-    
+
+    #region Functions / Methods
+
+    private int VersionToNumber(string version)
+    {
+        var bits = version.Replace("v", "").Split('.');
+        return bits[0].ToInt() * 1000000 + bits[1].ToInt() * 1000 + bits[2].ToInt();
+    }
+
+    #endregion
+
 }
