@@ -13,7 +13,7 @@ public partial class ForgottenStarToolbox : EditorPlugin
     {
         _toolboxScene = ResourceLoader.Load<PackedScene>("res://addons/forgotten_star_toolbox/scenes/toolbox.tscn");
         _toolbox = _toolboxScene.Instantiate<Control>();
-        (_toolbox as Toolbox).EditorPlugin = this;
+        ((Toolbox)_toolbox).EditorPlugin = this;
         AddControlToBottomPanel(_toolbox, "Toolbox");
     }
 

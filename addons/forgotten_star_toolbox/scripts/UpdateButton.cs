@@ -1,6 +1,9 @@
+#pragma warning disable CA1050
+// ReSharper disable CheckNamespace
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using Godot;
 using Godot.Collections;
 
@@ -17,6 +20,13 @@ public partial class UpdateButton : Button
     [OnReady("NeedsReloadDialog")] public ConfirmationDialog NeedsReloadDialog { get; set; }
     [OnReady("UpdateFailedDialog")] public AcceptDialog UpdateFailedDialog { get; set; }
     [OnReady("Timer")] public Timer Timer { get; set; }
+
+    #endregion
+
+    #region Fields
+
+    private bool _needsReloaded;
+    private readonly Func<bool> _onBeforeRefresh = () => true;
 
     #endregion
 
@@ -53,10 +63,12 @@ public partial class UpdateButton : Button
         if (response.GetType() != typeof(Variant)) return;
         
         var versions = new List<string>();
+        var releases = new List<Dictionary>();
         foreach (var data in response.AsGodotArray())
         {
             var release = Json.ParseString(data.ToString()).AsGodotDictionary();
             versions.Add(release["tag_name"].ToString());
+            releases.Add(release);
         }
 
         var versionNumbers = new List<int>();
@@ -65,24 +77,84 @@ public partial class UpdateButton : Button
             versionNumbers.Add(VersionToNumber(version));
         }
 
-        if (versions.Count() > 0)
-        {
-            var latestVersion = versions[versionNumbers.MaxIndex()];
-            var latestVersionNumber = versionNumbers.Max();
-            var currentVersionNumber = VersionToNumber(currentVersion);
-            AvailableVersionLabel.Text = latestVersion;
+        if (!versions.Any()) return;
+        var latestVersion = versions[versionNumbers.MaxIndex()];
+        var latestVersionNumber = versionNumbers.Max();
+        var currentVersionNumber = VersionToNumber(currentVersion);
+        AvailableVersionLabel.Text = latestVersion;
 
-            if (latestVersionNumber > currentVersionNumber)
+        if (latestVersionNumber > currentVersionNumber)
+        {
+            Text = $"Update Available [{latestVersion}]";
+            DownloadUpdateToolbox.NextVersionRelease = releases[0];
+            var color = GetThemeColor("error_color", "Editor");
+            AddThemeColorOverride("font_color", color);
+            AddThemeColorOverride("font_focus_color", color);
+            AddThemeColorOverride("font_hover_color", color);
+
+            AddThemeColorOverride("icon_normal_color", color);
+            AddThemeColorOverride("icon_focus_color", color);
+            AddThemeColorOverride("icon_hover_color", color);
+            Show();
+        }
+        else
+        {
+            Text = $"Update to Date [{latestVersion}]";
+            AddThemeColorOverride("font_color", Colors.Green);
+        }
+    }
+
+    public void OnUpdateButtonPressed()
+    {
+        if (_needsReloaded)
+        {
+            var willRefresh = _onBeforeRefresh.Invoke();
+            if (willRefresh)
             {
-                Text = $"Update Available [{latestVersion}]";
-                AddThemeColorOverride("font_color", Colors.Red);
-            }
-            else
-            {
-                Text = $"Update to Date [{latestVersion}]";
-                AddThemeColorOverride("font_color", Colors.Green);
+                EditorInterface.Singleton.RestartEditor();
             }
         }
+        else
+        {
+            var scale = EditorInterface.Singleton.GetEditorScale();
+            DownloadDialog.MinSize = new Vector2I((int)(300 * scale), (int)(250 * scale));
+            DownloadDialog.PopupCentered();
+        }
+    }
+
+    public void OnDownloadDialogCloseRequested()
+    {
+        DownloadDialog.Hide();
+    }
+
+    public void OnDownloadUpdatePanelUpdated(string updatedToVersion)
+    {
+        DownloadDialog.Hide();
+
+        NeedsReloadDialog.DialogText = "The project needs to be reloaded to install the update";
+        NeedsReloadDialog.OkButtonText = "Reload project";
+        NeedsReloadDialog.CancelButtonText = "Postpone update";
+        NeedsReloadDialog.PopupCentered();
+
+        _needsReloaded = true;
+        Text = "Reload Project";
+    }
+
+    public void OnDownloadUpdatePanelFailed()
+    {
+        DownloadDialog.Hide();
+        UpdateFailedDialog.DialogText = "There was a problem with downloading the update.";
+        UpdateFailedDialog.PopupCentered();
+    }
+
+    public void OnNeedsReloadDialogConfirmed()
+    {
+        EditorInterface.Singleton.RestartEditor();
+    }
+
+    public void OnTimerTimeout()
+    {
+        if(!_needsReloaded) CheckForUpdate();
     }
 
     #endregion

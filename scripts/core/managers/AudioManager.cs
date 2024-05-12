@@ -1,3 +1,5 @@
+// ReSharper disable CheckNamespace
+
 using Godot;
 using Godot.Collections;
 

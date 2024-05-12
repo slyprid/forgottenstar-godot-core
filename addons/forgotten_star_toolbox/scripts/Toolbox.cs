@@ -1,3 +1,5 @@
+// ReSharper disable CheckNamespace
+// ReSharper disable InconsistentNaming
 using System;
 using System.Collections.Generic;
 using System.IO;

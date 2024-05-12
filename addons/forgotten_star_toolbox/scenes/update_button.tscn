@@ -28,4 +28,10 @@ dialog_text = "You have been updated to version 1.2.3"
 [node name="Timer" type="Timer" parent="."]
 wait_time = 43200.0
 
+[connection signal="pressed" from="." to="." method="OnUpdateButtonPressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="OnHttpRequestCompleted"]
+[connection signal="close_requested" from="DownloadDialog" to="." method="OnDownloadDialogCloseRequested"]
+[connection signal="Failed" from="DownloadDialog/UpdateToolbox" to="." method="OnDownloadUpdatePanelFailed"]
+[connection signal="Updated" from="DownloadDialog/UpdateToolbox" to="." method="OnDownloadUpdatePanelUpdated"]
+[connection signal="confirmed" from="NeedsReloadDialog" to="." method="OnNeedsReloadDialogConfirmed"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

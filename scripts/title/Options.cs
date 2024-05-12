@@ -1,9 +1,12 @@
 #pragma warning disable CS8509
+// ReSharper disable CheckNamespace
+// ReSharper disable InconsistentNaming
+// ReSharper disable InvertIf
 
-using System;
 using System.Linq;
 using Godot;
-using Godot.Collections;
+
+
 
 public partial class Options : CanvasLayer
 {
@@ -117,7 +120,7 @@ public partial class Options : CanvasLayer
             {
                 ResolutionCombo.Selected = i;
                 break;
-            };
+            }
         }
     }
 

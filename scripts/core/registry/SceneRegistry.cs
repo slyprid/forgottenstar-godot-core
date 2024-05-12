@@ -1,3 +1,5 @@
+// ReSharper disable CheckNamespace
+
 public partial class Registry
 {
     public static class Scenes
